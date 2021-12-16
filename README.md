@@ -34,6 +34,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Static Code Analysis](#static-code-analysis)
   - [Code formatting](#code-formatting)
   - [Make application easy to setup](#make-application-easy-to-setup)
+  - [Deployment](#deployment)
   - [Code Generation](#code-generation)
   - [Version Control](#version-control)
     - [Pre-push/pre-commit hooks](#pre-pushpre-commit-hooks)
@@ -304,7 +305,7 @@ Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/b
 - Never store sensitive configuration variables (passwords/API keys/secret keys etc) in plain text in a configuration files or source code.
 - Store sensitive configuration variables, or variables that change depending on environment, as [environment variables](https://en.wikipedia.org/wiki/Environment_variable) ([dotenv](https://www.npmjs.com/package/dotenv) is a nice package for that) or as a [Docker/Kubernetes secrets](https://www.bogotobogo.com/DevOps/Docker/Docker_Kubernetes_Secrets.php).
 - Create hierarchical config files that are grouped into sections. If possible, create multiple files for different configs (like database config, API config, tasks config etc).
-- Application should fail and provide the immediate feedback if the required environment variables are not present at start-up.
+- Application should fail and provide the immediate feedback if the required environment variables are not present at start-up. [env-var](https://www.npmjs.com/package/env-var) is a nice package for nodejs that can take care of that.
 - For most projects plain object configs may be enough, but there are other options, for example: [NestJS Configuration](https://docs.nestjs.com/techniques/configuration), [rc](https://www.npmjs.com/package/rc), [nconf](https://www.npmjs.com/package/nconf) or any other package.
 
 Example files:
@@ -346,6 +347,7 @@ Here are some basic recommendation on what can be monitored:
 - Error rate – errors immediately affect your customers, you need to know when errors happen right away and fix them.
 - CPU and Memory usage – spikes in CPU and Memory usage can indicate that there are problems in your system, for example bad optimized code, unwanted process running, memory leaks etc. This can result in loss of money for your organization, especially when cloud providers are used.
 - Storage usage – servers run out of storage. Monitoring storage usage is essential to avoid data loss.
+- Monitor your backend and any 3rd party services that your backend use, monitor databases, kubernetes clusters etc. to ensure that everything in a system works as intended.
 
 Choose health monitoring tools depending on your needs, here are some examples:
 
@@ -421,6 +423,19 @@ Example files:
 
 - [package.json](https://github.com/Sairyss/domain-driven-hexagon/blob/master/package.json) - notice all added scripts for launching tests, migrations, seeding, docker environment etc.
 - [docker-compose.yml](https://github.com/Sairyss/domain-driven-hexagon/blob/master/docker/docker-compose.yml) - after configuring everything in a docker-compose file, running a database and a db admin panel (and any other additional tools) can be done using only one command. This way there is no need to install and configure a database separately.
+
+## Deployment
+
+Automate your deployment process. [CI/CD](https://en.wikipedia.org/wiki/CI/CD) tools can help with that.
+
+Deployment automation reduces errors, speeds up deployments, creates a smooth path to deliver updates and upgrades on a regular basis. The process becomes very easy, just pushing your changes to a repository can trigger a build and deploy process automatically so you don't have to do anything else.
+
+During deployment execute your e2e tests, load/fuzz tests, static code analysis checks, check for vulnerabilities in your packages etc. and stop a deploy process if anything fails. This prevents deploying failing or insecure code to production and makes your application robust and secure.
+
+Read more:
+
+- [8 Best Practices for Agile Software Deployment](https://stackify.com/deployment-best-practices/)
+- [CI/CD Best Practices for DevOps Teams](https://harness.io/blog/ci-cd-best-practices/)
 
 ## Code Generation
 
