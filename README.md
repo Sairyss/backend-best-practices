@@ -24,6 +24,10 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
     - [Write self-documenting code](#write-self-documenting-code)
     - [Prefer statically typed languages](#prefer-statically-typed-languages)
     - [Avoid useless comments](#avoid-useless-comments)
+  - [Database Best Practices](#database-best-practices)
+    - [Backups](#backups)
+    - [Managing Schema Changes](#managing-schema-changes)
+    - [Data Seeding](#data-seeding)
   - [Configuration](#configuration)
   - [Logging](#logging)
   - [Health monitoring](#health-monitoring)
@@ -31,10 +35,6 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Code formatting](#code-formatting)
   - [Make application easy to setup](#make-application-easy-to-setup)
   - [Code Generation](#code-generation)
-  - [Database Best Practices](#database-best-practices)
-    - [Backups](#backups)
-    - [Managing Schema Changes](#managing-schema-changes)
-    - [Data Seeding](#data-seeding)
   - [Version Control](#version-control)
     - [Pre-push/pre-commit hooks](#pre-pushpre-commit-hooks)
     - [Conventional commits](#conventional-commits)
@@ -252,6 +252,52 @@ Read more:
 - [Code Comment Is A Smell](https://fagnerbrack.medium.com/code-comment-is-a-smell-4e8d78b0415b)
 - [// No comments](https://medium.com/swlh/stop-adding-comments-to-your-code-80a3575519ad)
 
+## Database Best Practices
+
+### Backups
+
+Data is one of the most important things in your business. Keeping it safe is a top priority of any backend service.
+
+Here are some basic recommendations:
+
+- Create backups frequently and regularly
+- Use remote storages for your backups. Backing up your data and storing it on the same disk as your original data is a road to losing everything. When your storage breaks you will lose an original data and your backups. So keep your backups separately
+- Keep backups encrypted and protected. Backup encryption ensures data is protected from leaks and that your data will be what you expect when you recover it
+- Consider retention span. Keeping every backup forever isn’t feasible due to a limited amount of space for storage
+- Monitor the backup and restore process
+
+Read more:
+
+- [Backup and Recovery Best Practices](https://sqlbak.com/blog/backup-and-recovery-best-practices)
+- [The 7 critical backup strategy best practices to keep data safe](https://searchdatabackup.techtarget.com/feature/The-7-critical-backup-strategy-best-practices-to-keep-data-safe)
+
+### Managing Schema Changes
+
+Migrations can help for database table/schema changes:
+
+> Database migration refers to the management of incremental, reversible changes and version control to relational database schemas. A schema migration is performed on a database whenever it is necessary to update or revert that database's schema to some newer or older version.
+
+Source: [Wiki](https://en.wikipedia.org/wiki/Schema_migration)
+
+Migrations can be written manually or generated automatically every time database table schema is changed. When pushed to production it can be launched automatically.
+
+**BE CAREFUL** not to drop some columns/tables that contain data by accident. Perform data migrations before table schema migrations and always backup database before doing anything.
+
+Example: [Typeorm Migrations](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md) - it automatically generates sql table schema migrations like this: [1611765824842-CreateTables.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/database/migrations/1611765824842-CreateTables.ts)
+
+Read more:
+
+- [What are database migrations?](https://www.prisma.io/dataguide/types/relational/what-are-database-migrations#what-are-the-advantages-of-migration-tools)
+- [Database Migration: What It Is and How to Do It](https://www.cloudbees.com/blog/database-migration)
+
+### Data Seeding
+
+To avoid manually creating data in the database, [seeding](https://en.wikipedia.org/wiki/Database_seeding) is a great solution to populate database with data for development and testing purposes.
+
+Example package for nodejs: [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding#-using-entity-factory).
+
+Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/modules/user/database/seeding/user.seeds.ts)
+
 ## Configuration
 
 - Store all configurable variables/parameters in config files. Try to avoid using in-line literals/primitives. This will make it easier to find and maintain all configurable parameters when they are in one place.
@@ -392,49 +438,6 @@ Main advantages of automatic code generation are:
 **Note**:
 
 - To really understand and work with generated templates you need to understand what is being generated and why, so full understanding of an architecture and patterns used is required.
-
-## Database Best Practices
-
-### Backups
-
-Data is one of the most important things in your business. Keeping it safe is a top priority of any backend service.
-
-Here are some basic recommendations:
-
-- Create backups frequently and regularly
-- Use remote storages for your backups. Backing up your data and storing it on the same disk as your original data is a road to losing everything. When your storage breaks you will lose an original data and your backups. So keep your backups separately
-- Keep backups encrypted and protected. Backup encryption ensures data is protected from leaks and that your data will be what you expect when you recover it
-- Consider retention span. Keeping every backup forever isn’t feasible due to a limited amount of space for storage
-- Monitor the backup and restore process
-
-Read more:
-
-- [Backup and Recovery Best Practices](https://sqlbak.com/blog/backup-and-recovery-best-practices)
-- [The 7 critical backup strategy best practices to keep data safe](https://searchdatabackup.techtarget.com/feature/The-7-critical-backup-strategy-best-practices-to-keep-data-safe)
-
-### Managing Schema Changes
-
-Migrations can help for database table/schema changes:
-
-> Database migration refers to the management of incremental, reversible changes and version control to relational database schemas. A schema migration is performed on a database whenever it is necessary to update or revert that database's schema to some newer or older version.
-
-Source: [Wiki](https://en.wikipedia.org/wiki/Schema_migration)
-
-Migrations should be generated every time database table schema is changed. When pushed to production it can be launched automatically.
-
-**BE CAREFUL** not to drop some columns/tables that contain data by accident. Perform data migrations before table schema migrations and always backup database before doing anything.
-
-Example package: [Typeorm Migrations](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md) - it automatically generates sql table schema migrations like this:
-
-Example file: [1611765824842-CreateTables.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/database/migrations/1611765824842-CreateTables.ts)
-
-### Data Seeding
-
-To avoid manually creating data in the database, seeding is a great solution to populate database with data for development and testing purposes (e2e testing). [Wiki description](https://en.wikipedia.org/wiki/Database_seeding).
-
-Example package for nodejs: [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding#-using-entity-factory).
-
-Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/modules/user/database/seeding/user.seeds.ts)
 
 ## Version Control
 
