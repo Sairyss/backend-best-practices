@@ -310,7 +310,7 @@ Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/b
 
 Example files:
 
-- [ormconfig.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/configs/ormconfig.ts) - this is typeorm database config file. Notice `process.env` - those are environmental variables.
+- [ormconfig.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/configs/ormconfig.ts) - this is typeorm database config file.
 - [.env.example](https://github.com/Sairyss/domain-driven-hexagon/blob/master/.env.example) - this is [dotenv](https://www.npmjs.com/package/dotenv) example file. This file should only store dummy example secret keys, never store actual development/production secrets in it. This file later is renamed to `.env` and populated with real keys for every environment (local, dev or prod). Don't forget to add `.env` to [.gitignore](https://github.com/Sairyss/domain-driven-hexagon/blob/master/.gitignore) file to avoid pushing it to repo and leaking all keys.
 
 ## Logging
