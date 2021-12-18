@@ -154,14 +154,22 @@ Read more:
 
 ## API Security
 
-Below are some generic recommendations to protect your APIs and ensure at least good basic level of security:
+Software security is the application of techniques that allow to mitigate and protect software systems from vulnerabilities and malicious attacks.
 
+Software security is a large and complex discipline so we will not cover it in details here.
+
+Instead here are some generic recommendations to ensure at least basic level of security:
+
+- Ensure [secure coding](https://en.wikipedia.org/wiki/Secure_coding) practices
+- Validate all inputs and requests
 - Ensure you don’t store sensitive information in your Authentication tokens.
 - Use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol
-- Validate all inputs and requests
 - Ensure you encrypt all sensitive information stored in your database
 - Ensure that you are using safe cryptographic algorithms for encryption
+- Enforce least privilege. Ensure that users and systems have the minimum access privileges required to perform their job functions. Eliminating unnecessary access rights significantly reduces your [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
+- Monitor user activity on your servers to ensure that users are following software security best practices and to detect suspicious activities, such as privilege abuse and user impersonation.
 - Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
+- Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
 - Monitor vulnerabilities in any third party software / libraries you use
 - Don’t pass sensitive data in your API queries, for example: https://example.com/login/username=john&password=12345
 
