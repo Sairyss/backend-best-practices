@@ -35,6 +35,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Code formatting](#code-formatting)
   - [Make application easy to setup](#make-application-easy-to-setup)
   - [Deployment](#deployment)
+    - [Blue-Green Deployment](#blue-green-deployment)
   - [Code Generation](#code-generation)
   - [Version Control](#version-control)
     - [Pre-push/pre-commit hooks](#pre-pushpre-commit-hooks)
@@ -444,6 +445,16 @@ Read more:
 
 - [8 Best Practices for Agile Software Deployment](https://stackify.com/deployment-best-practices/)
 - [CI/CD Best Practices for DevOps Teams](https://harness.io/blog/ci-cd-best-practices/)
+
+### Blue-Green Deployment
+
+[Blue-green deployment](https://en.wikipedia.org/wiki/Blue-green_deployment) is a release strategy that proposes the use of two servers: "green" and "blue". When deploying, the new build is deployed to one of the servers ("green"). When build is finished, requests are routed to a new build ("green" server), while maintaining an old version of your program ("blue") running. If a "green" server has some bugs or doesn't work properly, you can easily switch back to a "blue" server with zero downtime. This allows to quickly roll back to a previous version if anything goes wrong by simply routing traffic back to a "blue" server with previous version of your program.
+
+Read more:
+
+- [BlueGreenDeployment](https://martinfowler.com/bliki/BlueGreenDeployment.html)
+- [What is Blue Green Deployment?](https://www.opsmx.com/blog/blue-green-deployment/)
+- [Intro to Deployment Strategies: Blue-Green, Canary, and More](https://harness.io/blog/blue-green-canary-deployment-strategies/)
 
 ## Code Generation
 
