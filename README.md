@@ -194,6 +194,10 @@ Below are some basic recommendations on what data should be validated:
 
 Cheap operations like checking for null/undefined and checking length of data come early in the list, and more expensive operations that require calling the database should be executed afterwards.
 
+Example files:
+
+- [create-user.request.dto.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/modules/user/commands/create-user/create-user.request.dto.ts) - _lexical_, _size_ and _existence_ validations of a [DTO](https://github.com/Sairyss/domain-driven-hexagon#dtos) using [decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) provided by [class-validator](https://www.npmjs.com/package/class-validator) package.
+
 Read more:
 
 - ["Secure by Design" Chapter 4.3: Validation](https://livebook.manning.com/book/secure-by-design/chapter-4/109).
