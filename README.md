@@ -17,6 +17,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
     - [Load Testing](#load-testing)
     - [Fuzz Testing](#fuzz-testing)
   - [API Security](#api-security)
+    - [Data Validation](#data-validation)
     - [Rate Limiting](#rate-limiting)
   - [Documentation](#documentation)
     - [Document APIs](#document-apis)
@@ -162,7 +163,7 @@ Software security is a large and complex discipline so we will not cover it in d
 Instead here are some generic recommendations to ensure at least basic level of security:
 
 - Ensure [secure coding](https://en.wikipedia.org/wiki/Secure_coding) practices
-- Validate all inputs and requests. Check out [Types of validation](https://github.com/Sairyss/domain-driven-hexagon#types-of-validation)
+- Validate all inputs and requests.
 - Ensure you don’t store sensitive information in your Authentication tokens.
 - Use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol
 - Ensure you encrypt all sensitive information stored in your database
@@ -177,6 +178,25 @@ Instead here are some generic recommendations to ensure at least basic level of 
 Read more:
 
 - [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
+
+### Data Validation
+
+[Data validation](https://en.wikipedia.org/wiki/Data_validation) is critical for security of your API.
+
+Below are some basic recommendations on what data should be validated:
+
+- _Origin - Is the data from a legitimate sender?_ When possible, accept data only from [authorized](https://en.wikipedia.org/wiki/Authorization) users / [whitelisted](https://en.wikipedia.org/wiki/Whitelisting) [IPs](https://en.wikipedia.org/wiki/IP_address) etc. depending on the situation.
+- _Existence - is provided data not empty?_ Further validations make no sense if data is empty. Check for empty values: null/undefined, empty objects and arrays.
+- _Size - Is it reasonably big?_ Before any further steps, check length/size of input data, no matter what type it is. This will prevent validating data that is too big which may block a thread entirely (sending data that is too big may be a [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attack).
+- _Lexical content - Does it contain the right characters and encoding?_ For example, if we expect data that only contains digits, we scan it to see if there’s anything else. If we find anything else, we draw the conclusion that the data is either broken by mistake or has been maliciously crafted to fool our system.
+- _Syntax - Is the format right?_ Check if data format is right. Sometimes checking syntax is as simple as using a regexp, or it may be more complex like parsing a XML or JSON.
+- _Semantics - Does the data make sense?_ Check data in connection with the rest of the system (like database, other processes etc). For example, checking in a database if ID of item exists.
+
+Cheap operations like checking for null/undefined and checking length of data come early in the list, and more expensive operations that require calling the database should be executed afterwards.
+
+Read more:
+
+- ["Secure by Design" Chapter 4.3: Validation](https://livebook.manning.com/book/secure-by-design/chapter-4/109).
 
 ### Rate Limiting
 
