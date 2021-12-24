@@ -162,17 +162,17 @@ Software security is a large and complex discipline so we will not cover it in d
 Instead here are some generic recommendations to ensure at least basic level of security:
 
 - Ensure [secure coding](https://en.wikipedia.org/wiki/Secure_coding) practices
-- Validate all inputs and requests
+- Validate all inputs and requests. Check out [Types of validation](https://github.com/Sairyss/domain-driven-hexagon#types-of-validation)
 - Ensure you don’t store sensitive information in your Authentication tokens.
 - Use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol
 - Ensure you encrypt all sensitive information stored in your database
-- Ensure that you are using safe cryptographic algorithms for encryption
+- Ensure that you are using safe encryption algorithms. There are a lot of algorithms that are still widely used, but are **not secure**, for example MD5, SHA1 etc. Secure algorithms include RSA (2048 bits or above), SHA2 (256 bits or above), AES (128 bits or above) etc. [Security/Guidelines/crypto algorithms](https://wiki.openstack.org/wiki/Security/Guidelines/crypto_algorithms)
 - Enforce least privilege. Ensure that users and systems have the minimum access privileges required to perform their job functions. Eliminating unnecessary access rights significantly reduces your [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
 - Monitor user activity on your servers to ensure that users are following software security best practices and to detect suspicious activities, such as privilege abuse and user impersonation.
 - Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
 - Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
 - Monitor vulnerabilities in any third party software / libraries you use
-- Don’t pass sensitive data in your API queries, for example: https://example.com/login/username=john&password=12345
+- Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
 
 Read more:
 
