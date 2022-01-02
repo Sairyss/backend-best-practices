@@ -449,7 +449,7 @@ This is a bad practice and should be avoided. Setting up project after downloadi
 - [package.json scripts](https://krishankantsinghal.medium.com/scripting-inside-package-json-4b06bea74c0e)
 - [docker-compose file](https://docs.docker.com/compose/)
 - [Makefile](https://opensource.com/article/18/8/what-how-makefile)
-- Database seeding and migrations (described below)
+- Database seeding and migrations
 - or any other tools.
 
 Example files:
