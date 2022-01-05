@@ -42,6 +42,8 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
     - [Pre-push/pre-commit hooks](#pre-pushpre-commit-hooks)
     - [Conventional commits](#conventional-commits)
   - [API Versioning](#api-versioning)
+- [Additional resources](#additional-resources)
+  - [Github Repositories](#github-repositories)
 
 ## Architecture
 
@@ -545,3 +547,9 @@ Example files:
 Read more:
 
 - [How to Version a REST API](https://www.freecodecamp.org/news/how-to-version-a-rest-api/)
+
+# Additional resources
+
+## Github Repositories
+
+- [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices)
