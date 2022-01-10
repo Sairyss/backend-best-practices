@@ -175,6 +175,7 @@ Instead here are some generic recommendations to ensure at least basic level of 
 - Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
 - Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
 - Monitor vulnerabilities in any third party software / libraries you use
+- Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
 - Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
 
 Read more:
