@@ -175,6 +175,7 @@ Instead here are some generic recommendations to ensure at least basic level of 
 - Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
 - Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
 - Monitor vulnerabilities in any third party software / libraries you use
+- Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
 - Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
 
 Read more:
@@ -550,11 +551,13 @@ API versioning is the practice of transparently managing changes to your API.
 
 API versioning allows you to incorporate the latest changes in a new version of your API thereby still allowing users to have access to the older version of your API without breaking your users application.
 
-If you need to create a new version of an endpoint, a simple solution would be to create new version of [DTOs](https://github.com/Sairyss/domain-driven-hexagon#DTOs) and a URL like this: `/v2/users`.
+If you need to create a new version of an endpoint, a simple solution would be to create new version of [DTOs](https://github.com/Sairyss/domain-driven-hexagon#DTOs) and a URL like this: `/v2/users`. Keep old version of an endpoint running for backwards compatibility until your users fully migrate to a new version.
 
 Creating a new version of an endpoint instead of modifying an old one protects users of your API from breaking their app.
 
 **Note**: if the only user of your API is your own frontend that can change on demand API versioning may be not worth it.
+
+For versioning packages, libraries, SDKs etc. you can use [semantic versioning](https://semver.org/).
 
 Example files:
 
