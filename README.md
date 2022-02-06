@@ -35,6 +35,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Health monitoring](#health-monitoring)
   - [Static Code Analysis](#static-code-analysis)
   - [Code formatting](#code-formatting)
+  - [Profiling](#profiling)
   - [Make application easy to setup](#make-application-easy-to-setup)
   - [Deployment](#deployment)
     - [Blue-Green Deployment](#blue-green-deployment)
@@ -263,6 +264,8 @@ Read more:
 
 Create a simple readme file in a git repository that describes basic app functionality, available CLI commands, how to setup a new project etc.
 
+- [How to Write a Readme Worth Reading](https://www.ctl.io/developers/blog/post/how-to-write-a-readme-worth-reading)
+
 ### Write self-documenting code
 
 Code can be self-documenting to some degree. One useful trick is to separate complex code to smaller chunks with a descriptive name. For example:
@@ -292,7 +295,7 @@ Read more:
 
 Writing readable code, using descriptive function/method/variable names and creating tests can document your code well enough. Try to avoid comments when possible and try to make your code legible and tested instead.
 
-Use comments only when it's really needed. Commenting may be a code smell in some cases, like when code gets changed but a developer forgets to update a comment (comments should be maintained, too).
+Use comments only when it's really needed. Commenting may be a code smell in some cases, like when code gets changed but a developer forgets to update a comment (comments should be maintained too).
 
 > Code never lies, comments sometimes do.
 
@@ -458,6 +461,15 @@ Consider using code formatters like [Prettier](https://www.npmjs.com/package/pre
 Read more:
 
 - [Why Coding Style Matters](https://www.smashingmagazine.com/2012/10/why-coding-style-matters/)
+
+## Profiling
+
+[Profiling](<https://en.wikipedia.org/wiki/Profiling_(computer_programming)>) allows us to collect and analyze data on how functions in your code perform when executed. This can help us with identifying bottlenecks in our code and fix them to make application perform faster.
+
+Here are some examples for NodeJS:
+
+- [Using the inbuilt Node.js profiler](https://blog.logrocket.com/using-inbuilt-node-js-profiler/)
+- [How to Automate Performance Profiling in Node.js](https://blog.bitsrc.io/how-to-automate-performance-profiling-in-nodejs-57524b8f763f?gi=740cbc9f20c6)
 
 ## Make application easy to setup
 
