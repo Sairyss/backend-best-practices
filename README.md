@@ -557,6 +557,8 @@ Creating a new version of an endpoint instead of modifying an old one protects u
 
 **Note**: if the only user of your API is your own frontend that can change on demand API versioning may be not worth it.
 
+If you are using [GraphQL](https://graphql.org/), you can use a [@deprecated](https://dgraph.io/docs/graphql/schema/deprecated/) directive on a field.
+
 For versioning packages, libraries, SDKs etc. you can use [semantic versioning](https://semver.org/).
 
 Example files:
