@@ -1,25 +1,28 @@
 # Backend best practices
 
-In this readme are presented some of the best practices, tools and guidelines for backend applications gathered from different sources.
-
-This Readme contains code examples mainly for TypeScript + NodeJS, but practices described here are language agnostic and can be used in any backend project.
-
 **Check out my other repositories**:
 
 - [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon) - Guide on Domain-Driven Design, software architecture, design patterns, best practices etc.
+- [Full-stack application example](https://github.com/Sairyss/full-stack-application-example) - an example of a simple full-stack application using NodeJS + NestJS, MongoDB + Mongoose, NX Monorepo, etc.
+
+---
+
+In this readme are presented some of the best practices, tools and guidelines for backend applications gathered from different sources.
+
+This Readme contains code examples mainly for TypeScript + NodeJS, but practices described here are language agnostic and can be used in any backend project.
 
 ---
 
 - [Backend best practices](#backend-best-practices)
   - [Architecture](#architecture)
-  - [Testing](#testing)
-    - [White box vs Black box](#white-box-vs-black-box)
-    - [Load Testing](#load-testing)
-    - [Fuzz Testing](#fuzz-testing)
   - [API Security](#api-security)
     - [Data Validation](#data-validation)
     - [Enforce least privilege](#enforce-least-privilege)
     - [Rate Limiting](#rate-limiting)
+  - [Testing](#testing)
+    - [White box vs Black box](#white-box-vs-black-box)
+    - [Load Testing](#load-testing)
+    - [Fuzz Testing](#fuzz-testing)
   - [Documentation](#documentation)
     - [Document APIs](#document-apis)
     - [Add Readme](#add-readme)
@@ -60,6 +63,90 @@ We discussed architecture in details in this repository: [Domain-Driven Hexagon]
 Read more:
 
 - [Software Architecture & Design Introduction](https://www.tutorialspoint.com/software_architecture_design/introduction.htm)
+
+## API Security
+
+Software security is the application of techniques that allow to mitigate and protect software systems from vulnerabilities and malicious attacks.
+
+Software security is a large and complex discipline so we will not cover it in details here.
+
+Instead here are some generic recommendations to ensure at least basic level of security:
+
+- Ensure [secure coding](https://en.wikipedia.org/wiki/Secure_coding) practices
+- Validate all inputs and requests.
+- Ensure you don’t store sensitive information in your Authentication tokens.
+- Use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol
+- Ensure you encrypt all sensitive information stored in your database
+- Ensure that you are using safe encryption algorithms. There are a lot of algorithms that are still widely used, but are **not secure**, for example MD5, SHA1 etc. Secure algorithms include RSA (2048 bits or above), SHA2 (256 bits or above), AES (128 bits or above) etc. [Security/Guidelines/crypto algorithms](https://wiki.openstack.org/wiki/Security/Guidelines/crypto_algorithms)
+- Monitor user activity on your servers to ensure that users are following software security best practices and to detect suspicious activities, such as privilege abuse and user impersonation.
+- Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
+- Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
+- Monitor vulnerabilities in any third party software / libraries you use
+- Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
+- Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
+
+Read more:
+
+- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
+
+### Data Validation
+
+[Data validation](https://en.wikipedia.org/wiki/Data_validation) is critical for security of your API.
+
+Below are some basic recommendations on what data should be validated:
+
+- _Origin - Is the data from a legitimate sender?_ When possible, accept data only from [authorized](https://en.wikipedia.org/wiki/Authorization) users / [whitelisted](https://en.wikipedia.org/wiki/Whitelisting) [IPs](https://en.wikipedia.org/wiki/IP_address) etc. depending on the situation.
+- _Existence - is provided data not empty?_ Further validations make no sense if data is empty. Check for empty values: null/undefined, empty objects and arrays.
+- _Size - Is it reasonably big?_ Before any further steps, check length/size of input data, no matter what type it is. This will prevent validating data that is too big which may block a thread entirely (sending data that is too big may be a [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attack).
+- _Lexical content - Does it contain the right characters and encoding?_ For example, if we expect data that only contains digits, we scan it to see if there’s anything else. If we find anything else, we draw the conclusion that the data is either broken by mistake or has been maliciously crafted to fool our system.
+- _Syntax - Is the format right?_ Check if data format is right. Sometimes checking syntax is as simple as using a regexp, or it may be more complex like parsing a XML or JSON.
+- _Semantics - Does the data make sense?_ Check data in connection with the rest of the system (like database, other processes etc). For example, checking in a database if ID of item exists.
+
+Cheap operations like checking for null/undefined and checking length of data come early in the list, and more expensive operations that require calling the database should be executed afterwards.
+
+Example files:
+
+- [create-user.request.dto.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/modules/user/commands/create-user/create-user.request.dto.ts) - _lexical_, _size_ and _existence_ validations of a [DTO](https://github.com/Sairyss/domain-driven-hexagon#dtos) using [decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) provided by [class-validator](https://www.npmjs.com/package/class-validator) package.
+
+Read more:
+
+- ["Secure by Design" Chapter 4.3: Validation](https://livebook.manning.com/book/secure-by-design/chapter-4/109).
+
+### Enforce least privilege
+
+Ensure that users and systems have the minimum access privileges required to perform their job functions ([Principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)).
+
+For example:
+
+- On your web server you can leave only 443 port for HTTPS requests open (and maybe a SSH port for administrating), and close all the other ports to prevent hackers connecting to other applications that may be running on your server.
+- When working with databases, give your APIs/services/users only the access rights that they need, and restrict everything else. Lets say if your API only needs to read data, let it read it, but not modify (for example when working with read replicas or [CQRS](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs#:~:text=CQRS%20stands%20for%20Command%20and,operations%20for%20a%20data%20store.&text=The%20flexibility%20created%20by%20migrating,conflicts%20at%20the%20domain%20level.) queries your API may only need to read that data but never modify it, so restrict update/delete actions for it).
+- Give proper access rights to users. For example, you want your newly hired employee to help your customer service, so you give him SSH access to production server so he can check the logs through a terminal when its needed. But you don't want him to shut down the server by accident, so leave him with a minimum access rights that he needs to do his job, and restrict access to anything else (and log all his actions).
+
+Eliminating unnecessary access rights significantly reduces your [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
+
+Read more:
+
+- [Principle of Least Privilege (PoLP): What Is It, Why Is It Important, & How to Use It](https://www.strongdm.com/blog/principle-of-least-privilege)
+
+### Rate Limiting
+
+Enforce a limit to the number of API requests within a time frame, this is called Rate Limiting or API throttling
+
+By default there is no limit on how many request users can make to your API. This may lead to problems, like [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) or brute force attacks, performance issues like high response time etc.
+
+To solve this, implementing [Rate Limiting](https://en.wikipedia.org/wiki/Rate_limiting) is essential for any API.
+
+Also enforce rate limiting for login attempts. Lock a user account for specific period of time after a given number of failed attempts
+
+- In NodeJS world, [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) is an option for simple APIs.
+- Another alternative is [NGINX Rate Limiting](https://www.nginx.com/blog/rate-limiting-nginx/).
+- [Kong](https://konghq.com/kong/) has [rate limiting plugin](https://docs.konghq.com/hub/kong-inc/rate-limiting/).
+
+Read more:
+
+- [Everything You Need To Know About API Rate Limiting](https://nordicapis.com/everything-you-need-to-know-about-api-rate-limiting/)
+- [Rate-limiting strategies and techniques](https://cloud.google.com/solutions/rate-limiting-strategies-techniques)
+- [How to Design a Scalable Rate Limiting Algorithm](https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/)
 
 ## Testing
 
@@ -157,90 +244,6 @@ Example tools:
 Read more:
 
 - [Fuzz Testing(Fuzzing) Tutorial: What is, Types, Tools & Example](https://www.guru99.com/fuzz-testing.html)
-
-## API Security
-
-Software security is the application of techniques that allow to mitigate and protect software systems from vulnerabilities and malicious attacks.
-
-Software security is a large and complex discipline so we will not cover it in details here.
-
-Instead here are some generic recommendations to ensure at least basic level of security:
-
-- Ensure [secure coding](https://en.wikipedia.org/wiki/Secure_coding) practices
-- Validate all inputs and requests.
-- Ensure you don’t store sensitive information in your Authentication tokens.
-- Use [TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security) protocol
-- Ensure you encrypt all sensitive information stored in your database
-- Ensure that you are using safe encryption algorithms. There are a lot of algorithms that are still widely used, but are **not secure**, for example MD5, SHA1 etc. Secure algorithms include RSA (2048 bits or above), SHA2 (256 bits or above), AES (128 bits or above) etc. [Security/Guidelines/crypto algorithms](https://wiki.openstack.org/wiki/Security/Guidelines/crypto_algorithms)
-- Monitor user activity on your servers to ensure that users are following software security best practices and to detect suspicious activities, such as privilege abuse and user impersonation.
-- Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
-- Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
-- Monitor vulnerabilities in any third party software / libraries you use
-- Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
-- Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
-
-Read more:
-
-- [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
-
-### Data Validation
-
-[Data validation](https://en.wikipedia.org/wiki/Data_validation) is critical for security of your API.
-
-Below are some basic recommendations on what data should be validated:
-
-- _Origin - Is the data from a legitimate sender?_ When possible, accept data only from [authorized](https://en.wikipedia.org/wiki/Authorization) users / [whitelisted](https://en.wikipedia.org/wiki/Whitelisting) [IPs](https://en.wikipedia.org/wiki/IP_address) etc. depending on the situation.
-- _Existence - is provided data not empty?_ Further validations make no sense if data is empty. Check for empty values: null/undefined, empty objects and arrays.
-- _Size - Is it reasonably big?_ Before any further steps, check length/size of input data, no matter what type it is. This will prevent validating data that is too big which may block a thread entirely (sending data that is too big may be a [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attack).
-- _Lexical content - Does it contain the right characters and encoding?_ For example, if we expect data that only contains digits, we scan it to see if there’s anything else. If we find anything else, we draw the conclusion that the data is either broken by mistake or has been maliciously crafted to fool our system.
-- _Syntax - Is the format right?_ Check if data format is right. Sometimes checking syntax is as simple as using a regexp, or it may be more complex like parsing a XML or JSON.
-- _Semantics - Does the data make sense?_ Check data in connection with the rest of the system (like database, other processes etc). For example, checking in a database if ID of item exists.
-
-Cheap operations like checking for null/undefined and checking length of data come early in the list, and more expensive operations that require calling the database should be executed afterwards.
-
-Example files:
-
-- [create-user.request.dto.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/modules/user/commands/create-user/create-user.request.dto.ts) - _lexical_, _size_ and _existence_ validations of a [DTO](https://github.com/Sairyss/domain-driven-hexagon#dtos) using [decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) provided by [class-validator](https://www.npmjs.com/package/class-validator) package.
-
-Read more:
-
-- ["Secure by Design" Chapter 4.3: Validation](https://livebook.manning.com/book/secure-by-design/chapter-4/109).
-
-### Enforce least privilege
-
-Ensure that users and systems have the minimum access privileges required to perform their job functions ([Principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege)).
-
-For example:
-
-- On your web server you can leave only 443 port for HTTPS requests open (and maybe a SSH port for administrating), and close all the other ports to prevent hackers connecting to other applications that may be running on your server.
-- When working with databases, give your APIs/services/users only the access rights that they need, and restrict everything else. Lets say if your API only needs to read data, let it read it, but not modify (for example when working with read replicas or [CQRS](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs#:~:text=CQRS%20stands%20for%20Command%20and,operations%20for%20a%20data%20store.&text=The%20flexibility%20created%20by%20migrating,conflicts%20at%20the%20domain%20level.) queries your API may only need to read that data but never modify it, so restrict update/delete actions for it).
-- Give proper access rights to users. For example, you want your newly hired employee to help your customer service, so you give him SSH access to production server so he can check the logs through a terminal when its needed. But you don't want him to shut down the server by accident, so leave him with a minimum access rights that he needs to do his job, and restrict access to anything else (and log all his actions).
-
-Eliminating unnecessary access rights significantly reduces your [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
-
-Read more:
-
-- [Principle of Least Privilege (PoLP): What Is It, Why Is It Important, & How to Use It](https://www.strongdm.com/blog/principle-of-least-privilege)
-
-### Rate Limiting
-
-Enforce a limit to the number of API requests within a time frame, this is called Rate Limiting or API throttling
-
-By default there is no limit on how many request users can make to your API. This may lead to problems, like [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) or brute force attacks, performance issues like high response time etc.
-
-To solve this, implementing [Rate Limiting](https://en.wikipedia.org/wiki/Rate_limiting) is essential for any API.
-
-Also enforce rate limiting for login attempts. Lock a user account for specific period of time after a given number of failed attempts
-
-- In NodeJS world, [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) is an option for simple APIs.
-- Another alternative is [NGINX Rate Limiting](https://www.nginx.com/blog/rate-limiting-nginx/).
-- [Kong](https://konghq.com/kong/) has [rate limiting plugin](https://docs.konghq.com/hub/kong-inc/rate-limiting/).
-
-Read more:
-
-- [Everything You Need To Know About API Rate Limiting](https://nordicapis.com/everything-you-need-to-know-about-api-rate-limiting/)
-- [Rate-limiting strategies and techniques](https://cloud.google.com/solutions/rate-limiting-strategies-techniques)
-- [How to Design a Scalable Rate Limiting Algorithm](https://konghq.com/blog/how-to-design-a-scalable-rate-limiting-algorithm/)
 
 ## Documentation
 
