@@ -35,7 +35,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
     - [Data Seeding](#data-seeding)
   - [Configuration](#configuration)
   - [Logging](#logging)
-  - [Health monitoring](#health-monitoring)
+  - [Monitoring](#monitoring)
   - [Static Code Analysis](#static-code-analysis)
   - [Code formatting](#code-formatting)
   - [Profiling](#profiling)
@@ -390,7 +390,7 @@ Read more:
 
 - [Make your app transparent using smart logs](https://github.com/goldbergyoni/nodebestpractices/blob/master/sections/production/smartlogging.md)
 
-## Health monitoring
+## Monitoring
 
 Additionally to logging tools, when something unexpected happens in production, it's critical to have thorough monitoring in place. As software hardens more and more, unexpected events will get more and more infrequent and reproducing those events will become harder and harder. So when one of those unexpected events happens, there should be as much data available about the event as possible. Software should be designed from the start to be monitored. Monitoring aspects of software are almost as important as the functionality of the software itself, especially in big systems, since unexpected events can lead to money and reputation loss for a company. Monitoring helps fixing and sometimes preventing unexpected behavior like failures, slow response times, errors etc.
 
@@ -410,6 +410,7 @@ Here are some basic recommendation on what can be monitored:
 Choose health monitoring tools depending on your needs, here are some examples:
 
 - [Sematext](https://sematext.com/), [AppSignal](https://appsignal.com/), [Prometheus](https://prometheus.io/), [Checkly](https://www.checklyhq.com/), [ClinicJS](https://clinicjs.org/)
+- [OpenTelemetry](https://opentelemetry.io/) - a collection of tools, APIs, and SDKs to instrument, generate, collect, and export telemetry data (metrics, logs, and traces).
 
 Read more:
 
