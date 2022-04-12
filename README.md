@@ -3,6 +3,7 @@
 **Check out my other repositories**:
 
 - [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon) - Guide on Domain-Driven Design, software architecture, design patterns, best practices etc.
+- [Distributed systems topics](https://github.com/Sairyss/distributed-systems-topics) list of topics and resources related to distributed systems, system design, microservices, scalability and performance, etc
 - [Full-stack application example](https://github.com/Sairyss/full-stack-application-example) - an example of a simple full-stack application using NodeJS + NestJS, MongoDB + Mongoose, NX Monorepo, etc.
 
 ---
