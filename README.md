@@ -429,13 +429,13 @@ Define and agree on standards in the development process, for example:
 - Enforce naming conventions
 - Define API response structure
 - Standard way of handling pagination of resources
-- Standardize protocols and event schemas will be used for communication between multiple systems
+- Standardize protocols and schemas that will be used for communication between multiple systems
 - Error handling
-- Versioning of your app, libraries and endpoints
+- Versioning of your app, libraries, endpoints, schemas, etc
 - Documentation
-- Standard ways to report health of the application
+- Standard ways to report health, errors, monitoring statistics, etc
 - Standard ways of logging and a place where those logs will be aggregated
-- etc
+- etc.
 
 Standards help enforce best practices and simplify both the development process and code.
 
