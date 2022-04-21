@@ -4,7 +4,6 @@
 
 - [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon) - Guide on Domain-Driven Design, software architecture, design patterns, best practices etc.
 - [Distributed systems topics](https://github.com/Sairyss/distributed-systems-topics) list of topics and resources related to distributed systems, system design, microservices, scalability and performance, etc
-- [Full-stack application example](https://github.com/Sairyss/full-stack-application-example) - an example of a simple full-stack application using NodeJS + NestJS, MongoDB + Mongoose, NX Monorepo, etc.
 
 ---
 
@@ -37,6 +36,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Configuration](#configuration)
   - [Logging](#logging)
   - [Monitoring](#monitoring)
+  - [Standardization](#standardization)
   - [Static Code Analysis](#static-code-analysis)
   - [Code formatting](#code-formatting)
   - [Profiling](#profiling)
@@ -416,6 +416,34 @@ Choose health monitoring tools depending on your needs, here are some examples:
 Read more:
 
 - [Essential Guide to API Monitoring: Basics Metrics & Choosing the Best Tools](https://sematext.com/blog/api-monitoring/)
+
+## Standardization
+
+[Standardization](https://en.wikipedia.org/wiki/Standardization) is the process of implementing and developing technical standards based on the consensus of different parties.
+
+Define and agree on standards in the development process, for example:
+
+- Tech stack and tools
+- Architectural practices, code style and formatting tools
+- Create reusable software objects and interfaces for common procedures
+- Enforce naming conventions
+- Define API response structure
+- Standard way of handling pagination of resources
+- Standardize protocols and event schemas will be used for communication between multiple systems
+- Error handling
+- Versioning of your app, libraries and endpoints
+- Documentation
+- Standard ways to report health of the application
+- Standard ways of logging and a place where those logs will be aggregated
+- etc
+
+Standards help enforce best practices and simplify both the development process and code.
+
+Create documents that describe your standards and enforce them as much as you can. Ideally there should be only one way of doing a common task. If you don't have standards everybody in the team will be doing things differently and your system will be a mess.
+
+Read more:
+
+- [6 Reasons Standardizing Your Software Is Essential](https://www.gonitro.com/blog/6-reasons-standardizing-software-essential)
 
 ## Static Code Analysis
 
