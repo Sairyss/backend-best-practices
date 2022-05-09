@@ -39,6 +39,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Standardization](#standardization)
   - [Static Code Analysis](#static-code-analysis)
   - [Code formatting](#code-formatting)
+  - [Shut down gracefully](#shut-down-gracefully)
   - [Profiling](#profiling)
   - [Make application easy to setup](#make-application-easy-to-setup)
   - [Deployment](#deployment)
@@ -497,6 +498,24 @@ Consider using code formatters like [Prettier](https://www.npmjs.com/package/pre
 Read more:
 
 - [Why Coding Style Matters](https://www.smashingmagazine.com/2012/10/why-coding-style-matters/)
+
+## Shut down gracefully
+
+When you shut down your application you may interrupt all operations that are running at that time and lose data. Unless you gracefully shut down your app.
+
+Shutting down gracefully means when you send a termination signal to your app, it should (if it's a web server):
+
+- Stop all new requests from clients
+- Wait until all current requests finish executing
+- Close server connections, like connection to a database, external APIs, etc.
+- Exit
+
+This way you are not interrupting running operations and prevent a lot of related problems.
+
+Read more:
+
+- [Graceful shutdown in NodeJS](https://hackernoon.com/graceful-shutdown-in-nodejs-2f8f59d1c357)
+- [Graceful shutdown in Go http server](https://medium.com/honestbee-tw-engineer/gracefully-shutdown-in-go-http-server-5f5e6b83da5a)
 
 ## Profiling
 
