@@ -25,6 +25,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
     - [Fuzz Testing](#fuzz-testing)
   - [Documentation](#documentation)
     - [Document APIs](#document-apis)
+    - [Use wiki](#use-wiki)
     - [Add Readme](#add-readme)
     - [Write self-documenting code](#write-self-documenting-code)
     - [Prefer statically typed languages](#prefer-statically-typed-languages)
@@ -264,6 +265,25 @@ Read more:
 
 - [Documenting a NodeJS REST API with OpenApi 3/Swagger](https://medium.com/wolox/documenting-a-nodejs-rest-api-with-openapi-3-swagger-5deee9f50420)
 - [Best Practices in API Documentation](https://swagger.io/blog/api-documentation/best-practices-in-api-documentation/)
+
+### Use wiki
+
+Create a wiki for collecting and sharing knowledge. Describe common tools, practices and procedures used in your organization. Write down notes explaining peculiarities of your software, how it works and why you made certain decisions.
+
+It must be easy for everyone, especially new team members, to learn about specifics of the project.
+
+According to [The Bus Factor](https://en.wikipedia.org/wiki/Bus_factor), projects can stall if knowledge is not shared properly across team members.
+
+Here are some useful tools for note-taking and creating wikis:
+
+- [Notion](https://www.notion.so/)
+- [Obsidian](https://obsidian.md/)
+- [Confluence](https://www.atlassian.com/software/confluence)
+
+Read more:
+
+- [How to build a wiki for your company](https://www.notion.so/help/guides/how-to-build-a-wiki-for-your-company)
+- [Use of Wikis in Organizational Knowledge Management](https://www.scirp.org/journal/paperinformation.aspx?paperid=63155)
 
 ### Add Readme
 
