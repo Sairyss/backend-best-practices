@@ -87,10 +87,12 @@ Instead here are some generic recommendations to ensure at least basic level of 
 - Monitor vulnerabilities in any third party software / libraries you use
 - Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
 - Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
+- Don't log sensitive data to prevent leaks
 
 Read more:
 
 - [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
+- [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/index.html)
 
 ### Data Validation
 
