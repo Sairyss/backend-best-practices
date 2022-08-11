@@ -94,7 +94,7 @@ Read more:
 
 ### Data Validation
 
-[Data validation](https://en.wikipedia.org/wiki/Data_validation) is critical for security of your API.
+[Data validation](https://en.wikipedia.org/wiki/Data_validation) is critical for security of your API. You should validate all the input sent to your API.
 
 Below are some basic recommendations on what data should be validated:
 
@@ -113,6 +113,7 @@ Example files:
 
 Read more:
 
+- [OWASP Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html)
 - ["Secure by Design" Chapter 4.3: Validation](https://livebook.manning.com/book/secure-by-design/chapter-4/109).
 
 ### Enforce least privilege
