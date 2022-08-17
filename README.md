@@ -71,9 +71,9 @@ Read more:
 
 Software security is the application of techniques that allow to mitigate and protect software systems from vulnerabilities and malicious attacks.
 
-Software security is a large and complex discipline so we will not cover it in details here.
+Software security is a large and complex discipline, so we will not cover it in details here.
 
-Instead here are some generic recommendations to ensure at least basic level of security:
+Instead, here are some generic recommendations to ensure at least basic level of security:
 
 - Ensure [secure coding](https://en.wikipedia.org/wiki/Secure_coding) practices
 - Validate all inputs and requests.
@@ -82,10 +82,10 @@ Instead here are some generic recommendations to ensure at least basic level of 
 - Ensure you encrypt all sensitive information stored in your database
 - Ensure that you are using safe encryption algorithms. There are a lot of algorithms that are still widely used, but are **not secure**, for example MD5, SHA1 etc. Secure algorithms include RSA (2048 bits or above), SHA2 (256 bits or above), AES (128 bits or above) etc. [Security/Guidelines/crypto algorithms](https://wiki.openstack.org/wiki/Security/Guidelines/crypto_algorithms)
 - Monitor user activity on your servers to ensure that users are following software security best practices and to detect suspicious activities, such as privilege abuse and user impersonation.
-- Never store secrets (passwords, keys, etc.) in the sources in version control (like github). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
-- Update your packages and software tools frequently so ensure latest bugs and vulnerabilities are fixed
+- Never store secrets (passwords, keys, etc.) in the sources in version control (like GitHub). Use environmental variables to store secrets. Put files with your secrets (like `.env`) to `.gitignore`.
+- Update your packages and software tools frequently so ensure the latest bugs and vulnerabilities are fixed
 - Monitor vulnerabilities in any third party software / libraries you use
-- Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
+- Follow popular cybersecurity blogs and websites to be aware of the latest security vulnerabilities. This way you can effectively mitigate them in time.
 - Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
 - Don't log sensitive data to prevent leaks
 - Harden your server by closing all but used ports, use firewall, block malicious connections using tools like [fail2ban](https://www.fail2ban.org/wiki/index.php/Main_Page), keep your server up to date, etc.
@@ -106,8 +106,8 @@ Below are some basic recommendations on what data should be validated:
 - _Existence - is provided data not empty?_ Further validations make no sense if data is empty. Check for empty values: null/undefined, empty objects and arrays.
 - _Size - Is it reasonably big?_ Before any further steps, check length/size of input data, no matter what type it is. This will prevent validating data that is too big which may block a thread entirely (sending data that is too big may be a [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) attack).
 - _Lexical content - Does it contain the right characters and encoding?_ For example, if we expect data that only contains digits, we scan it to see if there’s anything else. If we find anything else, we draw the conclusion that the data is either broken by mistake or has been maliciously crafted to fool our system.
-- _Syntax - Is the format right?_ Check if data format is right. Sometimes checking syntax is as simple as using a regexp, or it may be more complex like parsing a XML or JSON.
-- _Semantics - Does the data make sense?_ Check data in connection with the rest of the system (like database, other processes etc). For example, checking in a database if ID of item exists.
+- _Syntax - Is the format right?_ Check if data format is right. Sometimes checking syntax is as simple as using a regexp, or it may be more complex like parsing an XML or JSON.
+- _Semantics - Does the data make sense?_ Check data in connection with the rest of the system (like database, other processes etc.). For example, checking in a database if ID of item exists.
 
 Cheap operations like checking for null/undefined and checking length of data come early in the list, and more expensive operations that require calling the database should be executed afterwards.
 
@@ -126,9 +126,9 @@ Ensure that users and systems have the minimum access privileges required to per
 
 For example:
 
-- On your web server you can leave only 443 port for HTTPS requests open (and maybe a SSH port for administrating), and close all the other ports to prevent hackers connecting to other applications that may be running on your server.
-- When working with databases, give your APIs/services/users only the access rights that they need, and restrict everything else. Lets say if your API only needs to read data, let it read it, but not modify (for example when working with read replicas or [CQRS](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs#:~:text=CQRS%20stands%20for%20Command%20and,operations%20for%20a%20data%20store.&text=The%20flexibility%20created%20by%20migrating,conflicts%20at%20the%20domain%20level.) queries your API may only need to read that data but never modify it, so restrict update/delete actions for it).
-- Give proper access rights to users. For example, you want your newly hired employee to help your customer service, so you give him SSH access to production server so he can check the logs through a terminal when its needed. But you don't want him to shut down the server by accident, so leave him with a minimum access rights that he needs to do his job, and restrict access to anything else (and log all his actions).
+- On your web server you can leave only 443 port for HTTPS requests open (and maybe an SSH port for administrating), and close all the other ports to prevent hackers connecting to other applications that may be running on your server.
+- When working with databases, give your APIs/services/users only the access rights that they need, and restrict everything else. Let's say if your API only needs to read data, let it read it, but not modify (for example when working with read replicas or [CQRS](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs#:~:text=CQRS%20stands%20for%20Command%20and,operations%20for%20a%20data%20store.&text=The%20flexibility%20created%20by%20migrating,conflicts%20at%20the%20domain%20level.) queries your API may only need to read that data but never modify it, so restrict update/delete actions for it).
+- Give proper access rights to users. For example, you want your newly hired employee to help your customer service, so you give him SSH access to production server, so he can check the logs through a terminal when it is needed. But you don't want him to shut down the server by accident, so leave him with minimum access rights that he needs to do his job, and restrict access to anything else (and log all his actions).
 
 Eliminating unnecessary access rights significantly reduces your [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
 
@@ -140,7 +140,7 @@ Read more:
 
 Enforce a limit to the number of API requests within a time frame, this is called Rate Limiting or API throttling
 
-By default there is no limit on how many request users can make to your API. This may lead to problems, like [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) or brute force attacks, performance issues like high response time etc.
+By default, there is no limit on how many request users can make to your API. This may lead to problems, like [DoS](https://en.wikipedia.org/wiki/Denial-of-service_attack) or brute force attacks, performance issues like high response time etc.
 
 To solve this, implementing [Rate Limiting](https://en.wikipedia.org/wiki/Rate_limiting) is essential for any API.
 
@@ -158,7 +158,7 @@ Read more:
 
 ## Testing
 
-Software Testing helps catching bugs early. Properly tested software product ensures reliability, security and high performance which further results in time saving, cost effectiveness and customer satisfaction.
+Software Testing helps to catch bugs early. Properly tested software product ensures reliability, security and high performance which further results in time saving, cost-effectiveness and customer satisfaction.
 
 ### White box vs Black box
 
@@ -189,7 +189,7 @@ It's all about investing only in the tests that yield the biggest return on your
 
 Black Box / Behavioral tests can be divided in two parts:
 
-- Fast: Use cases tests in isolation which test only your business logic, with all I/O (external API or database calls, file reads etc.) mocked. This makes tests fast so they can be run all the time (after each change or before every commit). This will inform you when something fails as fast as possible. Finding bugs early is critical and saves a lot of time.
+- Fast: Use cases tests in isolation which test only your business logic, with all I/O (external API or database calls, file reads etc.) mocked. This makes tests fast, so they can be run all the time (after each change or before every commit). This will inform you when something fails as fast as possible. Finding bugs early is critical and saves a lot of time.
 - Slow: Full [End to End](https://www.guru99.com/end-to-end-testing.html) (e2e) tests which test a use case from end-user standpoint. Instead of injecting I/O mocks those tests should have all infrastructure up and running: like database, API routes etc. Those tests check how everything works together and are slower so can be run only before pushing/deploying. Though e2e tests can live in the same project/repository, it is a good practice to have e2e tests independent from project's code. In bigger projects e2e tests are usually written by a separate QA team.
 
 **Note**: some people try to make e2e tests faster by using in-memory or embedded databases (like [sqlite3](https://www.npmjs.com/package/sqlite3)). This makes tests faster, but reduces the reliability of those tests and should be avoided. Read more: [Don't use In-Memory Databases for Tests](https://phauer.com/2017/dont-use-in-memory-databases-tests-h2/).
@@ -198,7 +198,7 @@ For BDD tests [Cucumber](https://cucumber.io/) with [Gherkin](https://cucumber.i
 
 Example files:
 
-- [create-user.feature](https://github.com/Sairyss/domain-driven-hexagon/blob/master/tests/user/create-user/create-user.feature) - feature file that contains human readable Gherkin steps
+- [create-user.feature](https://github.com/Sairyss/domain-driven-hexagon/blob/master/tests/user/create-user/create-user.feature) - feature file that contains human-readable Gherkin steps
 - [create-user.e2e-spec.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/tests/user/create-user/create-user.e2e-spec.ts) - e2e / behavioral test
 
 Read more:
