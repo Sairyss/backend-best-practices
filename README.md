@@ -160,14 +160,14 @@ Software Testing helps catching bugs early. Properly tested software product ens
 
 ### White box vs Black box
 
-Lets review two types of software testing:
+Let's review two types of software testing:
 
 - [White Box](https://en.wikipedia.org/wiki/White-box_testing) testing.
 - [Black Box](https://en.wikipedia.org/wiki/Black-box_testing) testing.
 
 Testing module/use-case internal structures (creating a test for every file/class) is called _[`White Box`](https://www.scaler.com/topics/white-box-testing/)_ testing. _White Box_ testing is widely used technique, but it has disadvantages. It creates coupling to implementation details, so every time you decide to refactor business logic code this may also cause a refactoring of corresponding tests.
 
-Use case requirements may change mid work, your understanding of a problem may evolve or you may start noticing new patterns that emerge during development, in other words, you start noticing a "big picture", which may lead to refactoring. For example: imagine that you defined a unit test for a class, and while developing this class you start noticing that it does too much and should be separated into two classes. Now you'll also have to refactor your test. After some time, while implementing a new feature, you notice that this new feature uses some code from that class you defined before, so you decide to separate that code and make it reusable, creating a third class (which originally was one), which leads to changing your unit tests yet again, every time you refactor. Use case requirements, input, output or behavior never changed, but tests had to be changed multiple times. This is inefficient and time consuming.
+Use case requirements may change mid-work, your understanding of a problem may evolve, or you may start noticing new patterns that emerge during development, in other words, you start noticing a "big picture", which may lead to refactoring. For example: imagine that you defined a unit test for a class, and while developing this class you start noticing that it does too much and should be separated into two classes. Now you'll also have to refactor your test. After some time, while implementing a new feature, you notice that this new feature uses some code from that class you defined before, so you decide to separate that code and make it reusable, creating a third class (which originally was one), which leads to changing your unit tests yet again, every time you refactor. Use case requirements, input, output or behavior never changed, but tests had to be changed multiple times. This is inefficient and time-consuming.
 
 When we have domain models that change often, tests tend to change with them. Traditional white box unit tests tend to be very coupled to internals of our domain model structure.
 
@@ -175,7 +175,11 @@ To solve this and get the most out of your tests, prefer _`Black Box`_ testing (
 
 > Tests that are independent of implementation details are easier to maintain since they don't need to be changed each time you make a change to the implementation.
 
-Try to avoid _White Box_ testing when possible. However, it's worth mentioning that there are cases when _White Box_ testing may be useful. For instance, we need to go deeper into the implementation details when it is required to reduce combinations of testing conditions. For example, a class uses several plug-in [strategies](https://refactoring.guru/design-patterns/strategy), thus it is easier for us to test those strategies one at a time. Or you are developing a library that will be used by multiple modules or projects. In those cases _White Box_ tests may be appropriate.
+Try to avoid _White Box_ testing when possible. However, it's worth mentioning that there are cases when _White Box_ testing may be useful:
+
+- For instance, we need to go deeper into the implementation details when it is required to reduce combinations of testing conditions. For example, a class uses several plug-in [strategies](https://refactoring.guru/design-patterns/strategy), thus it is easier for us to test those strategies one at a time.
+- You are developing a library that will be used by multiple modules or projects. In those cases _White Box_ tests may be appropriate.
+- You want to document some complex piece of code. Creating a test can be a great way to do it instead of just writing comments/readme, since readme can get outdated, but test will fail if it gets outdated forcing you to update it.
 
 Use _White Box_ testing only when it is really needed and as an addition to _Black Box_ testing, not the other way around.
 
