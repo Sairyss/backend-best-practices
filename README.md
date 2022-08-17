@@ -88,11 +88,13 @@ Instead here are some generic recommendations to ensure at least basic level of 
 - Follow popular cyber security blogs and websites to be aware of latest security vulnerabilities. This way you can effectively mitigate them in time.
 - Don’t pass sensitive data in your API queries, for example: `https://example.com/login/username=john&password=12345`
 - Don't log sensitive data to prevent leaks
+- Harden your server by closing all but used ports, use firewall, block malicious connections using tools like [fail2ban](https://www.fail2ban.org/wiki/index.php/Main_Page), keep your server up to date, etc.
 
 Read more:
 
 - [OWASP Top Ten](https://owasp.org/www-project-top-ten/)
 - [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/index.html)
+- [Hardening a Linux Server for Production](https://jeremysik.substack.com/p/hardening-a-linux-server-for-production)
 
 ### Data Validation
 
