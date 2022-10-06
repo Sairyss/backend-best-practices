@@ -212,7 +212,7 @@ Read more:
 
 For projects with a bigger user base you might want to implement some kind of [load testing](https://en.wikipedia.org/wiki/Load_testing) to see how program behaves with a lot of concurrent users.
 
-Load testing is a great way to minimize performance risks, because it ensures an API can handle an expected load. By simulating traffic to an API in development, businesses can identify bottlenecks before they reach production environments. These bottlenecks can be difficult to find in development environments in the absence of a production load.
+Load testing is a great way to minimize performance risks, because it ensures an [API](https://www.interviewbit.com/blog/api-testing-tools/) can handle an expected load. By simulating traffic to an API in development, businesses can identify bottlenecks before they reach production environments. These bottlenecks can be difficult to find in development environments in the absence of a production load.
 
 Automatic load testing tools can simulate that load by making a lot of concurrent requests to an API and measure response times and error rates.
 
