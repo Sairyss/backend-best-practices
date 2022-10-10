@@ -373,7 +373,10 @@ Migrations can be written manually or generated automatically every time databas
 
 **BE CAREFUL** not to drop some columns/tables that contain data by accident. Perform data migrations before table schema migrations and always backup database before doing anything.
 
-Example: [Typeorm Migrations](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md) - it automatically generates sql table schema migrations like this: [1611765824842-CreateTables.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/database/migrations/1611765824842-CreateTables.ts)
+Examples:
+
+- [Typeorm Migrations](https://github.com/typeorm/typeorm/blob/master/docs/migrations.md) - can automatically generate sql table schema migrations like this: [1611765824842-CreateTables.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/7feca5cf992b47f3f28ccb1e9da5df0130f6d7ec/src/infrastructure/database/migrations/1631645442017-CreateTables.ts)
+- Or you could create raw SQL queries like this: [2022.10.07T13.49.19.users.sql](https://github.com/Sairyss/domain-driven-hexagon/blob/master/database/migrations/2022.10.07T13.49.19.users.sql)
 
 Read more:
 
@@ -386,7 +389,7 @@ To avoid manually creating data in the database, [seeding](https://en.wikipedia.
 
 Example package for nodejs: [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding#-using-entity-factory).
 
-Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/modules/user/database/seeding/user.seeds.ts)
+Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/7feca5cf992b47f3f28ccb1e9da5df0130f6d7ec/src/modules/user/database/seeding/user.seeds.ts)
 
 ## Configuration
 
@@ -399,7 +402,7 @@ Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/b
 
 Example files:
 
-- [ormconfig.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/configs/ormconfig.ts) - this is typeorm database config file.
+- [database.config.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/configs/database.config.ts) - database config that uses environmental variables and also validates them
 - [.env.example](https://github.com/Sairyss/domain-driven-hexagon/blob/master/.env.example) - this is [dotenv](https://www.npmjs.com/package/dotenv) example file. This file should only store dummy example secret keys, never store actual development/production secrets in it. This file later is renamed to `.env` and populated with real keys for every environment (local, dev or prod). Don't forget to add `.env` to [.gitignore](https://github.com/Sairyss/domain-driven-hexagon/blob/master/.gitignore) file to avoid pushing it to repo and leaking all keys.
 
 ## Logging
@@ -659,7 +662,7 @@ For versioning packages, libraries, SDKs etc. you can use [semantic versioning](
 
 Example files:
 
-- [app.routes.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/infrastructure/configs/app.routes.ts) - file that contains routes with its version.
+- [app.routes.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/master/src/configs/app.routes.ts) - file that contains routes with its version.
 
 Read more:
 
