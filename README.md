@@ -42,6 +42,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Code formatting](#code-formatting)
   - [Shut down gracefully](#shut-down-gracefully)
   - [Profiling](#profiling)
+  - [Benchmarking](#benchmarking)
   - [Make application easy to setup](#make-application-easy-to-setup)
   - [Deployment](#deployment)
     - [Blue-Green Deployment](#blue-green-deployment)
@@ -557,6 +558,15 @@ Here are some examples for NodeJS:
 
 - [Using the inbuilt Node.js profiler](https://blog.logrocket.com/using-inbuilt-node-js-profiler/)
 - [How to Automate Performance Profiling in Node.js](https://blog.bitsrc.io/how-to-automate-performance-profiling-in-nodejs-57524b8f763f?gi=740cbc9f20c6)
+
+## Benchmarking
+
+To make sure that your optimizations are working and system run fast, consider using [benchmarking](<https://en.wikipedia.org/wiki/Benchmark_(computing)>) tools to analyze execution times and performance of your backend, apps, scripts, jobs, etc.
+
+Read more:
+
+- [hyperfine](https://github.com/sharkdp/hyperfine) - A command-line benchmarking tool.
+- [How to Perform Web Server Performance Benchmark?](https://geekflare.com/web-performance-benchmark/)
 
 ## Make application easy to setup
 
