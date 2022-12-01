@@ -356,6 +356,7 @@ Here are some basic recommendations:
 - Keep backups encrypted and protected. Backup encryption ensures data is protected from leaks and that your data will be what you expect when you recover it
 - Consider retention span. Keeping every backup forever isn’t feasible due to a limited amount of space for storage
 - Monitor the backup and restore process
+- Consider using [point in time recovery](https://www.postgresql.org/docs/current/continuous-archiving.html) when you need to restore database to a specific point in time (if database supports it). This can be useful for synchronizing time between multiple databases when restoring them from a backup.
 
 Read more:
 
