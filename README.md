@@ -622,9 +622,10 @@ Main advantages of automatic code generation are:
 - No hand-coding means less errors and faster implementations. Simple CRUD module can be generated and used right away in seconds without any manual code writing.
 - Using auto-generated code templates ensures that everyone in the team uses the same folder/file structures, name conventions, architectural and code styles.
 
-**Note**:
+**Notes**:
 
 - To really understand and work with generated templates you need to understand what is being generated and why, so full understanding of an architecture and patterns used is required.
+- Don't try to implement code generation on early stages of development. At early stages your application architecture will change a lot adapting to new requirements, meaning that your code generation templates have to change too. Do it only when your project matures and becomes more stable.
 
 ## Version Control
 
