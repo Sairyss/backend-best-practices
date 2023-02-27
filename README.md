@@ -65,6 +65,8 @@ Choosing the right architecture is crucial for your application.
 
 We discussed architecture in details in this repository: [Domain-Driven Hexagon](https://github.com/Sairyss/domain-driven-hexagon).
 
+Make sure your architecture is enforced: [Enforcing architecture](https://github.com/Sairyss/domain-driven-hexagon#enforcing-architecture)
+
 Read more:
 
 - [Software Architecture & Design Introduction](https://www.tutorialspoint.com/software_architecture_design/introduction.htm)
