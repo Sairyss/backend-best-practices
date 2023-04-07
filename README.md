@@ -292,6 +292,7 @@ Here are some useful tools for note-taking and creating wikis:
 - [Notion](https://www.notion.so/)
 - [Obsidian](https://obsidian.md/)
 - [Confluence](https://www.atlassian.com/software/confluence)
+- [Outline](https://www.getoutline.com/)
 
 Read more:
 
