@@ -302,7 +302,8 @@ Read more:
 
 Create a simple readme file in a git repository that describes basic app functionality, available CLI commands, how to setup a new project etc.
 
-- [How to Write a Readme Worth Reading](https://www.ctl.io/developers/blog/post/how-to-write-a-readme-worth-reading)
+- [How to write a good README](https://dev.to/merlos/how-to-write-a-good-readme-bog)
+- [How to write a good README for your GitHub project?](https://bulldogjob.com/readme/how-to-write-a-good-readme-for-your-github-project)
 
 ### Write self-documenting code
 
