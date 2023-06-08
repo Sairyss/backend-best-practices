@@ -394,9 +394,16 @@ Read more:
 
 To avoid manually creating data in the database, [seeding](https://en.wikipedia.org/wiki/Database_seeding) is a great solution to populate database with data for development and testing purposes.
 
-Example package for nodejs: [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding#-using-entity-factory).
+Example packages for nodejs:
+
+- [typeorm-seeding](https://www.npmjs.com/package/typeorm-seeding#-using-entity-factory) - seeder for TypeORM
+- [faker.js](https://github.com/faker-js/faker) - generate mock data
 
 Example file: [user.seeds.ts](https://github.com/Sairyss/domain-driven-hexagon/blob/7feca5cf992b47f3f28ccb1e9da5df0130f6d7ec/src/modules/user/database/seeding/user.seeds.ts)
+
+Read more:
+
+- [Seed hundreds of dummy data using faker.js](https://bryanryu.medium.com/seed-hundreds-of-dummy-data-using-faker-js-ff0f05fb0e5b)
 
 ## Configuration
 
