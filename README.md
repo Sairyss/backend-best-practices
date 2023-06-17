@@ -296,6 +296,7 @@ Here are some useful tools for note-taking and creating wikis:
 
 Read more:
 
+- [The Surprising Power of Documentation](https://vadimkravcenko.com/shorts/proper-documentation/)
 - [How to build a wiki for your company](https://www.notion.so/help/guides/how-to-build-a-wiki-for-your-company)
 - [Use of Wikis in Organizational Knowledge Management](https://www.scirp.org/journal/paperinformation.aspx?paperid=63155)
 
