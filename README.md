@@ -509,7 +509,15 @@ async handleUserCreatedEvent(event: UserCreatedEvent) {
 
 We created a tracer span and logged some events before every function execution. These logs can be integrated with a cloud provider, or tools like [Prometheus](https://prometheus.io/), that will visualize your telemetry data, create charts and graphs, showing execution times for each span and log. Now, you can check your telemetry graphs at any time and instantly locate exact function call that causes unusual spikes.
 
-Telemetry data can be logged anywhere: API endpoints to see how long each request takes, event handlers to trace event execution, large functions with multiple steps, periodic jobs, and so on.
+Telemetry data can be logged anywhere:
+
+- API endpoints to see how long each request takes
+- event handlers to trace event execution
+- network calls, like calling external APIs
+- database queries to observe query execution times
+- large functions with multiple steps
+- periodic jobs
+- other places of interest
 
 Using telemetry makes it trivial to locate bottlenecks in your application.
 
