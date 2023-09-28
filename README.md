@@ -38,6 +38,7 @@ This Readme contains code examples mainly for TypeScript + NodeJS, but practices
   - [Configuration](#configuration)
   - [Logging](#logging)
   - [Monitoring](#monitoring)
+    - [Telemetry](#telemetry)
   - [Standardization](#standardization)
   - [Static Code Analysis](#static-code-analysis)
   - [Code formatting](#code-formatting)
@@ -464,12 +465,57 @@ Here are some basic recommendation on what can be monitored:
 Choose health monitoring tools depending on your needs, here are some examples:
 
 - [Sematext](https://sematext.com/), [AppSignal](https://appsignal.com/), [Prometheus](https://prometheus.io/), [Checkly](https://www.checklyhq.com/), [ClinicJS](https://clinicjs.org/)
-- [OpenTelemetry](https://opentelemetry.io/) - a collection of tools, APIs, and SDKs to instrument, generate, collect, and export telemetry data (metrics, logs, and traces).
 
 Read more:
 
 - [Essential Guide to API Monitoring: Basics Metrics & Choosing the Best Tools](https://sematext.com/blog/api-monitoring/)
 - [DevOps measurement: Monitoring and observability](https://cloud.google.com/architecture/devops/devops-measurement-monitoring-and-observability)
+
+### Telemetry
+
+Telemetry data (metrics, logs, and traces) can help analyze your software’s performance and behavior.
+
+For example, imagine that you have an event handler that listens for events and executes something:
+
+```typescript
+async handleUserCreatedEvent(event: UserCreatedEvent) {
+  await scheduleEmailNotification(event);
+  await createWalletForNewUser(event);
+  await doSomethingElse(event);
+}
+```
+
+In production environments, you or your clients can notice that application is unresponsive, or that operations have a long delay, and sometimes it's hard to determine why. Telemetry data can help investigate why. Let's modify our previous example:
+
+```typescript
+async handleUserCreatedEvent(event: UserCreatedEvent) {
+  // Initialize tracing with OpenTelemetry
+  const tracer = trace.getTracer('EventSubscriber', '0.1.0');
+  const span = tracer.startSpan(name);
+  span.addAttribute('eventName', event.name);
+
+  span.addEvent(`Received event. Scheduling email notification...`);
+  await scheduleEmailNotification(event);
+
+  span.addEvent(`Creating wallet for new user...`);
+  await createWalletForNewUser(event);
+
+  span.addEvent(`Starting something else...`);
+  await doSomethingElse(event);
+
+  span.addEvent(`Event processed.`);
+}
+```
+
+We created a tracer span and logged some events before every function execution. These logs can be integrated with a cloud provider, or tools like [Prometheus](https://prometheus.io/), that will visualize your telemetry data, create charts and graphs, showing execution times for each span and log. Now, you can check your telemetry graphs at any time and instantly locate exact function call that causes unusual spikes.
+
+Telemetry data can be logged anywhere: API endpoints to see how long each request takes, event handlers to trace event execution, large functions with multiple steps, periodic jobs, and so on.
+
+Using telemetry makes it trivial to locate bottlenecks in your application.
+
+Example tools:
+
+- [OpenTelemetry](https://opentelemetry.io/) - a collection of tools, APIs, and SDKs to instrument, generate, collect, and export telemetry data.
 
 ## Standardization
 
