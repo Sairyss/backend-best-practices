@@ -755,3 +755,4 @@ Read more:
 ## Github Repositories
 
 - [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices)
+- [TypeScript Style Guide](https://mkosir.github.io/typescript-style-guide/)
