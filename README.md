@@ -464,7 +464,7 @@ Here are some basic recommendation on what can be monitored:
 
 Choose health monitoring tools depending on your needs, here are some examples:
 
-- [Sematext](https://sematext.com/), [AppSignal](https://appsignal.com/), [Prometheus](https://prometheus.io/), [Checkly](https://www.checklyhq.com/), [ClinicJS](https://clinicjs.org/)
+- [Sematext](https://sematext.com/), [AppSignal](https://appsignal.com/), [Prometheus](https://prometheus.io/), [Checkly](https://www.checklyhq.com/), [ClinicJS](https://clinicjs.org/), [Middleware](https://middleware.io/)
 
 Read more:
 
